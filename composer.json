@@ -1,0 +1,20 @@
+{
+    "name": "ledevoir/pianoid-api-php-sdk",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Philippe bourdeau",
+            "email": "philippe@cloudhelp.ca"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "~6.5"
+    },
+    "autoload": {
+        "psr-4" :{
+            "LeDevoir\\PianoIdApiSDK\\": "src/"
+        }
+    }
+}
