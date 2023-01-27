@@ -7,6 +7,7 @@
             "email": "philippe@cloudhelp.ca"
         }
     ],
+    "description": "The unofficial PHP SDK for PianoID API",
     "require": {
         "php": ">=7.1",
         "ext-json": "*",
