@@ -1,17 +1,23 @@
 {
     "name": "ledevoir/pianoid-api-php-sdk",
+    "description": "The unofficial PHP SDK for PianoID API",
     "type": "library",
+    "license": [
+        "MIT"
+    ],
     "authors": [
         {
             "name": "Philippe bourdeau",
             "email": "philippe@cloudhelp.ca"
         }
     ],
-    "description": "The unofficial PHP SDK for PianoID API",
     "require": {
         "php": ">=7.1",
         "ext-json": "*",
         "guzzlehttp/guzzle": "6.2.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~7.5"
     },
     "autoload": {
         "psr-4" :{

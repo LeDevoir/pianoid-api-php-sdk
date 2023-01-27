@@ -12,65 +12,65 @@ final class Client
 {
     private const BASE_URI = '/id/api/v1/publisher';
 
-    /**
-     * @var string
-     */
+    /** @var string  */
     private $baseUrl;
-    /**
-     * @var string
-     */
+
+    /** @var string  */
     private $applicationId;
-    /**
-     * @var string
-     */
+
+    /** @var string  */
     private $apiKey;
-    /**
-     * @var string
-     */
-    private $privateKey;
-    /**
-     * @var bool
-     */
-    private $isSandbox;
 
     /** @var Client */
     private static $instance;
-    /**
-     * @var GuzzleClient
-     */
+
+    /** @var GuzzleClient  */
     private $client;
 
     private function __construct(
         string $baseUrl,
         string $applicationId,
-        string $apiToken,
-        string $privateKey,
-        bool   $isSandbox
-    )
-    {
+        string $apiToken
+    ){
         $this->baseUrl = $baseUrl;
         $this->applicationId = $applicationId;
         $this->apiKey = $apiToken;
-        $this->privateKey = $privateKey;
-        $this->isSandbox = $isSandbox;
         $this->client = new GuzzleClient(['base_uri' => $this->baseUrl]);
     }
 
     /**
+     * @param string|null $baseUrl
+     * @param string|null $applicationId
+     * @param string|null $apiToken
+     *
      * @return Client
      */
-    public static function getInstance(): self
+    public static function getInstance(
+        string $baseUrl = null,
+        string $applicationId = null,
+        string $apiToken = null
+    ): self
     {
+        if (empty($baseUrl)) {
+            throw new \RuntimeException('Base url is required to create client instance.');
+        }
+
+        if (empty($applicationId)) {
+            throw new \RuntimeException('Application id is required to create client instance.');
+        }
+
+        if (empty($apiToken)) {
+            throw new \RuntimeException('Api token is required to create client instance.');
+        }
+
         if (self::$instance) {
             return self::$instance;
         }
 
         return self::$instance = new self(
-            $_ENV['PIANO_ID_API_BASE_URL'],
-            $_ENV['PIANO_APPLICATION_ID'],
-            $_ENV['PIANO_API_TOKEN'],
-            $_ENV['PIANO_PRIVATE_KEY'],
-            boolval($_ENV['PIANO_IS_SANDBOX'])
+            $baseUrl,
+            $applicationId,
+            $apiToken
         );
     }
 
