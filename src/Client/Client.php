@@ -39,27 +39,19 @@ final class Client
     }
 
     /**
-     * @param string|null $baseUrl
-     * @param string|null $applicationId
-     * @param string|null $apiToken
-     *
      * @return Client
      */
-    public static function getInstance(
-        string $baseUrl = null,
-        string $applicationId = null,
-        string $apiToken = null
-    ): self
+    public static function getInstance(): self
     {
-        if (empty($baseUrl)) {
+        if (empty($_ENV['PIANO_ID_API_BASE_URL'])) {
             throw new \RuntimeException('Base url is required to create client instance.');
         }
 
-        if (empty($applicationId)) {
+        if (empty($_ENV['PIANO_APPLICATION_ID'])) {
             throw new \RuntimeException('Application id is required to create client instance.');
         }
 
-        if (empty($apiToken)) {
+        if (empty($_ENV['PIANO_API_TOKEN'])) {
             throw new \RuntimeException('Api token is required to create client instance.');
         }
 
@@ -68,9 +60,9 @@ final class Client
         }
 
         return self::$instance = new self(
-            $baseUrl,
-            $applicationId,
-            $apiToken
+            $_ENV['PIANO_ID_API_BASE_URL'],
+            $_ENV['PIANO_APPLICATION_ID'],
+            $_ENV['PIANO_API_TOKEN']
         );
     }
 
@@ -117,5 +109,10 @@ final class Client
         );
 
         return LoginResponse::fromResponse($response);
+    }
+
+    public function logout()
+    {
+
     }
 }
