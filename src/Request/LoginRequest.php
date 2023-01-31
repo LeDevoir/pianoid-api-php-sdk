@@ -26,6 +26,10 @@ class LoginRequest extends BaseRequest
         $this->password = $password;
     }
 
+    /**
+     * @param Response $response
+     * @return LoginResponse
+     */
     public function toResponse(Response $response): ResponseContract
     {
         return new LoginResponse($response);

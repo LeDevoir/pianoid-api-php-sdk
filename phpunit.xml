@@ -9,9 +9,9 @@
          verbose="true">
 
     <php>
-        <env name="PIANO_ID_API_BASE_URL" value="www.whatever.com"/>
-        <env name="PIANO_APPLICATION_ID" value="valid_application_id"/>
-        <env name="PIANO_API_TOKEN" value="VERY_SECURE_TOKEN"/>
+        <env name="PIANO_ID_API_BASE_URL" value="https://sandbox.piano.io"/>
+        <env name="PIANO_APPLICATION_ID" value="application_id"/>
+        <env name="PIANO_API_TOKEN" value="api_token"/>
     </php>
 
     <testsuites>

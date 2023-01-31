@@ -5,28 +5,77 @@ namespace LeDevoir\PianoIdApiSDK\Response;
 use GuzzleHttp\Psr7\Response;
 use LeDevoir\PianoIdApiSDK\Utils;
 
-abstract class BaseResponse
+abstract class BaseResponse implements ResponseContract
 {
     /**
-     * @param Response $response
-     * @return static
+     * @var Response
      */
-    public static function fromResponse(Response $response): self
+    protected $httpResponse;
+
+    /**
+     * @var array
+     */
+    protected $errors = [];
+
+    public function __construct(Response $response)
+    {
+        $this->httpResponse = $response;
+
+        $this->isSuccess()
+            ? $this->mapResponseToAttributes()
+            : $this->setErrors();
+    }
+
+    public function isSuccess(): bool
+    {
+        return $this->httpResponse->getStatusCode() < 400;
+    }
+
+    /**
+     * @return Response
+     */
+    public function getHttpResponse(): Response
+    {
+        return $this->httpResponse;
+    }
+
+    /**
+     * Returns the first error message
+     * Arbitrary business logic decision, might be a problem down the road.
+     * Might need to be reworked
+     *
+     * @return string|null
+     */
+    public function errorMessage(): string
+    {
+        return $this->errors[0] ?? '';
+    }
+
+    private function mapResponseToAttributes()
     {
         $body = json_decode(
-            $response->getBody()->getContents()
+            (string) $this->httpResponse->getBody()
         );
 
-        $template = new \ReflectionClass(static::class);
-        $properties = $template->getProperties();
-        $instance = new static();
+        foreach($body as $key => $value) {
+            $property = Utils::snakeToCamelCase($key);
+            if (property_exists(static::class, $property)) {
+                $this->{$property} = $body->{$key};
+            }
+        }
+    }
 
-        array_walk($properties, function (\ReflectionProperty $property) use ($template, $body, $instance) {
-            $name = Utils::snakeToCamelCase($property->getName());
+    private function setErrors()
+    {
+        $body = json_decode(
+            (string) $this->httpResponse->getBody()
+        );
 
-            $instance->{$name} = $body->{$name};
-        });
-
-        return $instance;
+        $this->errors = array_map(
+            function($item) {
+                return $item->{'message'};
+            },
+            $body->{'error_code_list'}
+        );
     }
 }

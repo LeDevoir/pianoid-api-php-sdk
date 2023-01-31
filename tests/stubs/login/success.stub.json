@@ -1,0 +1,8 @@
+{
+  "access_token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+  "token_type" : "Bearer",
+  "refresh_token" : "RFGQfHHGrpddt2",
+  "expires_in" : 3599,
+  "email_confirmation_required" : false,
+  "extend_expired_access_enabled" : false
+}
