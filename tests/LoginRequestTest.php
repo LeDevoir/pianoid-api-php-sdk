@@ -18,7 +18,7 @@ class LoginRequestTest extends TestCase
 
     const LOGIN_URL = '/id/api/v1/publisher/login';
 
-    public function testRequestExpectations()
+    public function testRequestAttributes()
     {
         $request = new LoginRequest(
             'email@email.com',
