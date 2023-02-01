@@ -1,6 +1,8 @@
 <?php
 
-namespace LeDevoir\PianoIdApiSDK\Response;
+namespace LeDevoir\PianoIdApiSDK\Response\Login;
+
+use LeDevoir\PianoIdApiSDK\Response\BaseResponse;
 
 final class LoginResponse extends BaseResponse
 {

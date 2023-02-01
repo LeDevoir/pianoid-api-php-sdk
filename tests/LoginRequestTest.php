@@ -6,7 +6,7 @@ use GuzzleHttp\Exception\ServerException;
 use LeDevoir\PianoIdApiSDK\Client\GuzzleClient;
 use LeDevoir\PianoIdApiSDK\Environment;
 use LeDevoir\PianoIdApiSDK\Request\BaseRequest;
-use LeDevoir\PianoIdApiSDK\Request\LoginRequest;
+use LeDevoir\PianoIdApiSDK\Request\Login\LoginRequest;
 use PHPUnit\Framework\TestCase;
 
 /**

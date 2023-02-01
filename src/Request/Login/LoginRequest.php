@@ -1,9 +1,10 @@
 <?php
 
-namespace LeDevoir\PianoIdApiSDK\Request;
+namespace LeDevoir\PianoIdApiSDK\Request\Login;
 
 use GuzzleHttp\Psr7\Response;
-use LeDevoir\PianoIdApiSDK\Response\LoginResponse;
+use LeDevoir\PianoIdApiSDK\Request\BaseRequest;
+use LeDevoir\PianoIdApiSDK\Response\Login\LoginResponse;
 use LeDevoir\PianoIdApiSDK\Response\ResponseContract;
 
 class LoginRequest extends BaseRequest
