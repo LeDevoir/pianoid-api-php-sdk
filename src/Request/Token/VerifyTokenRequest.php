@@ -19,7 +19,7 @@ class VerifyTokenRequest extends BaseRequest
 
     /**
      * @param Response $response
-     * @return ResponseContract
+     * @return VerifyTokenResponse
      */
     public function toResponse(Response $response): ResponseContract
     {

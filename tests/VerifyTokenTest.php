@@ -2,6 +2,9 @@
 
 namespace LeDevoir\PianoIdApiSDK\Tests;
 
+use LeDevoir\PianoIdApiSDK\Client\GuzzleClient;
+use LeDevoir\PianoIdApiSDK\Environment;
+use LeDevoir\PianoIdApiSDK\Request\Login\LoginRequest;
 use LeDevoir\PianoIdApiSDK\Request\Token\VerifyTokenRequest;
 use PHPUnit\Framework\TestCase;
 
@@ -21,5 +24,51 @@ class VerifyTokenTest extends TestCase
         self::assertEquals(self::VERIFY_TOKEN_URL, $request->uri());
         self::assertEquals('very_secure_token', $request->getToken());
         self::assertEmpty(array_diff(['token' => 'very_secure_token'], $request->queryParameters()));
+    }
+
+    public function testSuccess()
+    {
+        $client = new GuzzleClient(
+            new Environment(),
+            $this->mockClientWithStubbedResponse(
+                200,
+                '/stubs/verifyToken/success'
+            )
+        );
+
+        $token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5';
+        $request = new VerifyTokenRequest($token);
+
+        $response = $client->send($request);
+        $transformedResponse = $request->toResponse($response);
+
+        self::assertTrue($response->getStatusCode() === 200);
+        self::assertEquals($token, $transformedResponse->getAccessToken());
+        self::assertEquals(1337, $transformedResponse->getExpiresIn());
+        self::assertEquals('Bearer', $transformedResponse->getTokenType());
+    }
+
+    public function testForbiddenRequest()
+    {
+        $client = new GuzzleClient(
+            new Environment(),
+            $this->mockClientWithStubbedResponse(
+                403,
+                '/stubs/verifyToken/forbidden'
+            )
+        );
+
+        $request = new VerifyTokenRequest(
+            'invalid_token'
+        );
+
+        $response = $client->send($request);
+        $transformedResponse = $request->toResponse($response);
+
+        self::assertTrue($response->getStatusCode() === 403);
+        self::assertEquals(
+            'Invalid access token',
+            $transformedResponse->errorMessage()
+        );
     }
 }
