@@ -1,0 +1,8 @@
+{
+  "access_token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5",
+  "token_type" : "Bearer",
+  "expires_in" : 3046,
+  "email_confirmation_required" : false,
+  "extend_expired_access_enabled" : false,
+  "pub_id" : "df13d9cd-44b9-4a64-99eb-1195d243b526"
+}
