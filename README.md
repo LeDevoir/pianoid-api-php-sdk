@@ -1,5 +1,8 @@
 The unofficial PHP SDK for PianoID API
 
+## Documentation
+https://docs.piano.io/piano-id-api
+
 ### Disclaimer
 1. This is a work-in-progress in the very early stages
 2. Outdated dependencies are used because of other project constraints, but upgrading the project to the latest php project and dependencies would be easily feasible
