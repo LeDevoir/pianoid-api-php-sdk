@@ -54,6 +54,9 @@ class LoginRequestTest extends TestCase
         $transformed = $request->toResponse($response);
 
         self::assertEquals(200, $response->getStatusCode());
+        self::assertEquals('Bearer', $transformed->getTokenType());
+        self::assertEquals('RFGQfHHGrpddt2', $transformed->getRefreshToken());
+        self::assertEquals(3599, $transformed->getExpiresIn());
         self::assertEquals(
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
             $transformed->getAccessToken()
