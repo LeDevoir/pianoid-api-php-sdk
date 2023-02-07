@@ -4,7 +4,6 @@ namespace LeDevoir\PianoIdApiSDK\Tests;
 
 use LeDevoir\PianoIdApiSDK\Client\GuzzleClient;
 use LeDevoir\PianoIdApiSDK\Environment;
-use LeDevoir\PianoIdApiSDK\Request\Login\LoginRequest;
 use LeDevoir\PianoIdApiSDK\Request\Token\VerifyTokenRequest;
 use PHPUnit\Framework\TestCase;
 
@@ -26,6 +25,13 @@ class VerifyTokenTest extends TestCase
         self::assertEmpty(array_diff(['token' => 'very_secure_token'], $request->queryParameters()));
     }
 
+    /**
+     * @covers \LeDevoir\PianoIdApiSDK\Response\Token\VerifyTokenResponse::getAccessToken
+     * @covers \LeDevoir\PianoIdApiSDK\Response\Token\VerifyTokenResponse::getExpiresIn
+     * @covers \LeDevoir\PianoIdApiSDK\Response\Token\VerifyTokenResponse::getTokenType
+     *
+     * @return void
+     */
     public function testSuccess()
     {
         $client = new GuzzleClient(
@@ -48,6 +54,10 @@ class VerifyTokenTest extends TestCase
         self::assertEquals('Bearer', $transformedResponse->getTokenType());
     }
 
+    /**
+     * @covers \LeDevoir\PianoIdApiSDK\Response\Token\VerifyTokenResponse::errorMessage
+     * @return void
+     */
     public function testForbiddenRequest()
     {
         $client = new GuzzleClient(
