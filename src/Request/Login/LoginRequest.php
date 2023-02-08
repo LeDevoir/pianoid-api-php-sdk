@@ -4,7 +4,6 @@ namespace LeDevoir\PianoIdApiSDK\Request\Login;
 
 use GuzzleHttp\Psr7\Response;
 use LeDevoir\PianoIdApiSDK\Request\PianoIdRequest;
-use LeDevoir\PianoIdApiSDK\Response\FailureResponse;
 use LeDevoir\PianoIdApiSDK\Response\Login\LoginResponse;
 
 final class LoginRequest extends PianoIdRequest
@@ -52,16 +51,8 @@ final class LoginRequest extends PianoIdRequest
     /**
      * @inheritDoc
      */
-    public function success(Response $response): LoginResponse
+    public function toPianoIdResponse(Response $response): LoginResponse
     {
         return new LoginResponse($response);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function failure(Response $response): FailureResponse
-    {
-        return new FailureResponse($response);
     }
 }

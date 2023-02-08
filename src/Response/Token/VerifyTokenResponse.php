@@ -2,9 +2,9 @@
 
 namespace LeDevoir\PianoIdApiSDK\Response\Token;
 
-use LeDevoir\PianoIdApiSDK\Response\SuccessResponse;
+use LeDevoir\PianoIdApiSDK\Response\PianoIdResponse;
 
-final class VerifyTokenResponse extends SuccessResponse
+final class VerifyTokenResponse extends PianoIdResponse
 {
     public string $accessToken;
     public string $tokenType;

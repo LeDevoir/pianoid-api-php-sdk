@@ -11,8 +11,6 @@ use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Psr7\Response;
 use LeDevoir\PianoIdApiSDK\Environment;
 use LeDevoir\PianoIdApiSDK\Request\PianoIdRequest;
-use LeDevoir\PianoIdApiSDK\Request\TransformsToPsrRequest;
-use LeDevoir\PianoIdApiSDK\Response\PianoIdResponse;
 
 final class GuzzleClient
 {
@@ -29,10 +27,10 @@ final class GuzzleClient
 
     /**
      * @param PianoIdRequest $request
-     * @return PianoIdResponse
+     * @return Response
      * @throws GuzzleException
      */
-    public function send(PianoIdRequest $request): PianoIdResponse
+    public function send(PianoIdRequest $request): Response
     {
         try {
             $httpRequest = $request->toPsrRequest(
@@ -40,11 +38,9 @@ final class GuzzleClient
                 $this->environment->getApiToken()
             );
 
-            return $request->success(
-                $this->client->send($httpRequest)
-            );
+            return $this->client->send($httpRequest);
         } catch (ClientException $exception) {
-            return $request->failure($exception->getResponse());
+            return $exception->getResponse();
         } catch (ServerException|TransferException $exception) {
             /**
              * In case of error 500 or any other unexpected error

@@ -4,7 +4,6 @@ namespace LeDevoir\PianoIdApiSDK\Request\Token;
 
 use GuzzleHttp\Psr7\Response;
 use LeDevoir\PianoIdApiSDK\Request\PianoIdRequest;
-use LeDevoir\PianoIdApiSDK\Response\FailureResponse;
 use LeDevoir\PianoIdApiSDK\Response\Token\VerifyTokenResponse;
 
 final class VerifyTokenRequest extends PianoIdRequest
@@ -44,16 +43,8 @@ final class VerifyTokenRequest extends PianoIdRequest
     /**
      * @inheritDoc
      */
-    public function success(Response $response): VerifyTokenResponse
+    public function toPianoIdResponse(Response $response): VerifyTokenResponse
     {
         return new VerifyTokenResponse($response);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function failure(Response $response): FailureResponse
-    {
-        return new FailureResponse($response);
     }
 }

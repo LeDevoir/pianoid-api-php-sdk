@@ -51,15 +51,16 @@ class LoginRequestTest extends TestCase
         );
 
         $response = $client->send($request);
+        $transformed = $request->toPianoIdResponse($response);
 
-        self::assertEquals(200, $response->getResponse()->getStatusCode());
-        self::assertEquals(false, $response->isError());
-        self::assertEquals('Bearer', $response->getTokenType());
-        self::assertEquals('RFGQfHHGrpddt2', $response->getRefreshToken());
-        self::assertEquals(3599, $response->getExpiresIn());
+        self::assertEquals(200, $response->getStatusCode());
+        self::assertEquals(false, $transformed->isFailure());
+        self::assertEquals('Bearer', $transformed->getTokenType());
+        self::assertEquals('RFGQfHHGrpddt2', $transformed->getRefreshToken());
+        self::assertEquals(3599, $transformed->getExpiresIn());
         self::assertEquals(
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-            $response->getAccessToken()
+            $transformed->getAccessToken()
         );
     }
 
@@ -79,12 +80,13 @@ class LoginRequestTest extends TestCase
         );
 
         $response = $client->send($request);
+        $transformed = $request->toPianoIdResponse($response);
 
-        self::assertEquals(403, $response->getResponse()->getStatusCode());
-        self::assertEquals(true, $response->isError());
+        self::assertEquals(403, $response->getStatusCode());
+        self::assertEquals(true, $transformed->isFailure());
         self::assertEquals(
             'That combination of email and password is not recognized',
-            $response->errorMessage()
+            $transformed->errorMessage()
         );
     }
 
@@ -104,12 +106,13 @@ class LoginRequestTest extends TestCase
         );
 
         $response = $client->send($request);
+        $transformed = $request->toPianoIdResponse($response);
 
-        self::assertEquals(400, $response->getResponse()->getStatusCode());
-        self::assertEquals(true, $response->isError());
+        self::assertEquals(400, $response->getStatusCode());
+        self::assertEquals(true, $transformed->isFailure());
         self::assertEquals(
             'Required params are missing: email',
-            $response->errorMessage()
+            $transformed->errorMessage()
         );
     }
 

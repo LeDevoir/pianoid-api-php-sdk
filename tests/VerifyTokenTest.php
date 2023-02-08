@@ -48,11 +48,12 @@ class VerifyTokenTest extends TestCase
         $request = new VerifyTokenRequest($token);
 
         $response = $client->send($request);
+        $transformed = $request->toPianoIdResponse($response);
 
-        self::assertTrue($response->getResponse()->getStatusCode() === 200);
-        self::assertEquals($token, $response->getAccessToken());
-        self::assertEquals(1337, $response->getExpiresIn());
-        self::assertEquals('Bearer', $response->getTokenType());
+        self::assertTrue($response->getStatusCode() === 200);
+        self::assertEquals($token, $transformed->getAccessToken());
+        self::assertEquals(1337, $transformed->getExpiresIn());
+        self::assertEquals('Bearer', $transformed->getTokenType());
     }
 
     /**
@@ -75,11 +76,12 @@ class VerifyTokenTest extends TestCase
         );
 
         $response = $client->send($request);
+        $transformed = $request->toPianoIdResponse($response);
 
-        self::assertEquals(403, $response->getResponse()->getStatusCode());
+        self::assertEquals(403, $response->getStatusCode());
         self::assertEquals(
             'Invalid access token',
-            $response->errorMessage()
+            $transformed->errorMessage()
         );
     }
 }

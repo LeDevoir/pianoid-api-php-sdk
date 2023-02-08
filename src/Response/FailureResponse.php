@@ -4,7 +4,7 @@ namespace LeDevoir\PianoIdApiSDK\Response;
 
 use GuzzleHttp\Psr7\Response;
 
-final class FailureResponse implements PianoIdResponse
+final class FailureResponse implements WrapsHttpResponse
 {
     private Response $response;
 
@@ -41,16 +41,8 @@ final class FailureResponse implements PianoIdResponse
     /**
      * @inheritDoc
      */
-    public function getResponse(): Response
+    public function getHttpResponse(): Response
     {
         return $this->response;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isError(): bool
-    {
-        return true;
     }
 }
