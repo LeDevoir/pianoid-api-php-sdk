@@ -2,21 +2,14 @@
 
 namespace LeDevoir\PianoIdApiSDK\Response\Login;
 
-use LeDevoir\PianoIdApiSDK\Response\BaseResponse;
+use LeDevoir\PianoIdApiSDK\Response\SuccessResponse;
 
-final class LoginResponse extends BaseResponse
+final class LoginResponse extends SuccessResponse
 {
-    /** @var string */
-    public $accessToken;
-
-    /** @var string */
-    public $tokenType;
-
-    /** @var string */
-    public $refreshToken;
-
-    /** @var int */
-    public $expiresIn;
+    public string $accessToken;
+    public string $tokenType;
+    public string $refreshToken;
+    public int $expiresIn;
 
     /**
      * @return string

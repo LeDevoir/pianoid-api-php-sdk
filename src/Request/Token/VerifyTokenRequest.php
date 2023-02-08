@@ -3,27 +3,17 @@
 namespace LeDevoir\PianoIdApiSDK\Request\Token;
 
 use GuzzleHttp\Psr7\Response;
-use LeDevoir\PianoIdApiSDK\Request\BaseRequest;
-use LeDevoir\PianoIdApiSDK\Response\ResponseContract;
+use LeDevoir\PianoIdApiSDK\Request\PianoIdRequest;
+use LeDevoir\PianoIdApiSDK\Response\FailureResponse;
 use LeDevoir\PianoIdApiSDK\Response\Token\VerifyTokenResponse;
 
-class VerifyTokenRequest extends BaseRequest
+final class VerifyTokenRequest extends PianoIdRequest
 {
-    /** @var string  */
-    private $token;
+    private string $token;
 
     public function __construct(string $token)
     {
         $this->token = $token;
-    }
-
-    /**
-     * @param Response $response
-     * @return VerifyTokenResponse
-     */
-    public function toResponse(Response $response): ResponseContract
-    {
-        return new VerifyTokenResponse($response);
     }
 
     public function uri(): string
@@ -49,5 +39,21 @@ class VerifyTokenRequest extends BaseRequest
     public function getToken(): string
     {
         return $this->token;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function success(Response $response): VerifyTokenResponse
+    {
+        return new VerifyTokenResponse($response);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function failure(Response $response): FailureResponse
+    {
+        return new FailureResponse($response);
     }
 }

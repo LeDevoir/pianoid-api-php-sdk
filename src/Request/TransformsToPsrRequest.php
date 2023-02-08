@@ -2,16 +2,16 @@
 
 namespace LeDevoir\PianoIdApiSDK\Request;
 
-use GuzzleHttp\Psr7\Response;
-use LeDevoir\PianoIdApiSDK\Response\ResponseContract;
+use GuzzleHttp\Psr7\Request;
 
-interface RequestContract
+interface TransformsToPsrRequest
 {
     /**
-     * @param Response $response
-     * @return ResponseContract
+     * @param string $applicationId
+     * @param string $apiToken
+     * @return Request
      */
-    public function toResponse(Response $response): ResponseContract;
+    public function toPsrRequest(string $applicationId, string $apiToken): Request;
 
     /**
      * @return string

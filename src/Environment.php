@@ -2,20 +2,11 @@
 
 namespace LeDevoir\PianoIdApiSDK;
 
-class Environment
+final class Environment
 {
-    /**
-     * @var string
-     */
-    private $baseUrl;
-    /**
-     * @var string
-     */
-    private $applicationId;
-    /**
-     * @var string
-     */
-    private $apiToken;
+    private string $baseUrl;
+    private string $applicationId;
+    private string $apiToken;
 
     public function __construct(
         string $baseUrl = '',
@@ -41,25 +32,25 @@ class Environment
     }
 
     /**
-     * @return mixed|string
+     * @return string
      */
-    public function getBaseUrl()
+    public function getBaseUrl(): string
     {
         return $this->baseUrl;
     }
 
     /**
-     * @return mixed|string
+     * @return string
      */
-    public function getApplicationId()
+    public function getApplicationId(): string
     {
         return $this->applicationId;
     }
 
     /**
-     * @return mixed|string
+     * @return string
      */
-    public function getApiToken()
+    public function getApiToken(): string
     {
         return $this->apiToken;
     }

@@ -5,7 +5,7 @@ namespace LeDevoir\PianoIdApiSDK\Tests;
 use GuzzleHttp\Exception\ServerException;
 use LeDevoir\PianoIdApiSDK\Client\GuzzleClient;
 use LeDevoir\PianoIdApiSDK\Environment;
-use LeDevoir\PianoIdApiSDK\Request\BaseRequest;
+use LeDevoir\PianoIdApiSDK\Request\PianoIdRequest;
 use LeDevoir\PianoIdApiSDK\Request\Login\LoginRequest;
 use PHPUnit\Framework\TestCase;
 
@@ -26,7 +26,7 @@ class LoginRequestTest extends TestCase
         );
 
         self::assertEquals(self::LOGIN_URL, $request->uri());
-        self::assertEquals(BaseRequest::HTTP_METHOD_POST, $request->method());
+        self::assertEquals(PianoIdRequest::HTTP_METHOD_POST, $request->method());
 
         self::assertArrayHasKey(LoginRequest::EMAIL_KEY, $request->queryParameters());
         self::assertArrayHasKey(LoginRequest::PASSWORD_KEY, $request->queryParameters());
@@ -51,15 +51,15 @@ class LoginRequestTest extends TestCase
         );
 
         $response = $client->send($request);
-        $transformed = $request->toResponse($response);
 
-        self::assertEquals(200, $response->getStatusCode());
-        self::assertEquals('Bearer', $transformed->getTokenType());
-        self::assertEquals('RFGQfHHGrpddt2', $transformed->getRefreshToken());
-        self::assertEquals(3599, $transformed->getExpiresIn());
+        self::assertEquals(200, $response->getResponse()->getStatusCode());
+        self::assertEquals(false, $response->isError());
+        self::assertEquals('Bearer', $response->getTokenType());
+        self::assertEquals('RFGQfHHGrpddt2', $response->getRefreshToken());
+        self::assertEquals(3599, $response->getExpiresIn());
         self::assertEquals(
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-            $transformed->getAccessToken()
+            $response->getAccessToken()
         );
     }
 
@@ -79,12 +79,12 @@ class LoginRequestTest extends TestCase
         );
 
         $response = $client->send($request);
-        $transformedResponse = $request->toResponse($response);
 
-        self::assertEquals(403, $response->getStatusCode());
+        self::assertEquals(403, $response->getResponse()->getStatusCode());
+        self::assertEquals(true, $response->isError());
         self::assertEquals(
             'That combination of email and password is not recognized',
-            $transformedResponse->errorMessage()
+            $response->errorMessage()
         );
     }
 
@@ -104,12 +104,12 @@ class LoginRequestTest extends TestCase
         );
 
         $response = $client->send($request);
-        $transformedResponse = $request->toResponse($response);
 
-        self::assertTrue($response->getStatusCode() === 400);
+        self::assertEquals(400, $response->getResponse()->getStatusCode());
+        self::assertEquals(true, $response->isError());
         self::assertEquals(
             'Required params are missing: email',
-            $transformedResponse->errorMessage()
+            $response->errorMessage()
         );
     }
 

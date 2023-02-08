@@ -5,62 +5,51 @@ namespace LeDevoir\PianoIdApiSDK\Client;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\RequestOptions;
 use LeDevoir\PianoIdApiSDK\Environment;
-use LeDevoir\PianoIdApiSDK\Request\RequestContract;
+use LeDevoir\PianoIdApiSDK\Request\PianoIdRequest;
+use LeDevoir\PianoIdApiSDK\Request\TransformsToPsrRequest;
+use LeDevoir\PianoIdApiSDK\Response\PianoIdResponse;
 
 final class GuzzleClient
 {
-    /**
-     * @var ClientInterface
-     */
-    private $client;
-    /**
-     * @var Environment
-     */
-    private $environment;
+    private ClientInterface $client;
+    private Environment $environment;
 
     public function __construct(
-        Environment $environment,
+        ?Environment $environment,
         ?ClientInterface $client = null
     ){
-        $this->environment = $environment;
+        $this->environment = $environment ?? new Environment();
         $this->client = $client ?? new Client(['base_uri' => $environment->getBaseUrl()]);
     }
 
-    public function send(RequestContract $request): Response
+    /**
+     * @param PianoIdRequest $request
+     * @return PianoIdResponse
+     * @throws GuzzleException
+     */
+    public function send(PianoIdRequest $request): PianoIdResponse
     {
         try {
-            $response = $this->client->request(
-                $request->method(),
-                $request->uri(),
-                [
-                    RequestOptions::QUERY => $this->queryParameters($request)
-                ]
+            $httpRequest = $request->toPsrRequest(
+                $this->environment->getApplicationId(),
+                $this->environment->getApiToken()
+            );
+
+            return $request->success(
+                $this->client->send($httpRequest)
             );
         } catch (ClientException $exception) {
-            $response = $exception->getResponse();
+            return $request->failure($exception->getResponse());
         } catch (ServerException|TransferException $exception) {
             /**
              * In case of error 500 or any other unexpected error
              */
             throw $exception;
         }
-
-        return $response;
-    }
-
-    private function queryParameters(RequestContract $request): array
-    {
-        return array_merge(
-            [
-                'aid' => $this->environment->getApplicationId(),
-                'api_token' => $this->environment->getApiToken(),
-            ],
-            $request->queryParameters()
-        );
     }
 }

@@ -2,7 +2,7 @@
 
 namespace LeDevoir\PianoIdApiSDK;
 
-class Utils
+final class Utils
 {
     /**
      * @param string $input

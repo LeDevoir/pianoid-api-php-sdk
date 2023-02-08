@@ -3,44 +3,36 @@
 namespace LeDevoir\PianoIdApiSDK\Request\Login;
 
 use GuzzleHttp\Psr7\Response;
-use LeDevoir\PianoIdApiSDK\Request\BaseRequest;
+use LeDevoir\PianoIdApiSDK\Request\PianoIdRequest;
+use LeDevoir\PianoIdApiSDK\Response\FailureResponse;
 use LeDevoir\PianoIdApiSDK\Response\Login\LoginResponse;
-use LeDevoir\PianoIdApiSDK\Response\ResponseContract;
 
-class LoginRequest extends BaseRequest
+final class LoginRequest extends PianoIdRequest
 {
     public const EMAIL_KEY = 'email';
     public const PASSWORD_KEY = 'password';
 
-    /**
-     * @var string
-     */
-    private $email;
-    /**
-     * @var string
-     */
-    private $password;
+    private string $email;
+    private string $password;
 
-    public function __construct(string $username, string $password)
+
+    public function __construct(string $email, string $password)
     {
-        $this->email = $username;
+        $this->email = $email;
         $this->password = $password;
     }
 
     /**
-     * @param Response $response
-     * @return LoginResponse
+     * @return string
      */
-    public function toResponse(Response $response): ResponseContract
-    {
-        return new LoginResponse($response);
-    }
-
     public function uri(): string
     {
         return sprintf('%s/login', self::BASE_URL);
     }
 
+    /**
+     * @return string
+     */
     public function method(): string
     {
         return self::HTTP_METHOD_POST;
@@ -55,5 +47,21 @@ class LoginRequest extends BaseRequest
             self::EMAIL_KEY => $this->email,
             self::PASSWORD_KEY => $this->password
         ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function success(Response $response): LoginResponse
+    {
+        return new LoginResponse($response);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function failure(Response $response): FailureResponse
+    {
+        return new FailureResponse($response);
     }
 }
