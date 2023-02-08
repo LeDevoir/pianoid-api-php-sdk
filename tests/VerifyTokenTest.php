@@ -2,6 +2,7 @@
 
 namespace LeDevoir\PianoIdApiSDK\Tests;
 
+use GuzzleHttp\Exception\GuzzleException;
 use LeDevoir\PianoIdApiSDK\Client\GuzzleClient;
 use LeDevoir\PianoIdApiSDK\Environment;
 use LeDevoir\PianoIdApiSDK\Request\Token\VerifyTokenRequest;
@@ -31,8 +32,9 @@ class VerifyTokenTest extends TestCase
      * @covers \LeDevoir\PianoIdApiSDK\Response\Token\VerifyTokenResponse::getTokenType
      *
      * @return void
+     * @throws GuzzleException
      */
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $client = new GuzzleClient(
             new Environment(),
@@ -46,19 +48,19 @@ class VerifyTokenTest extends TestCase
         $request = new VerifyTokenRequest($token);
 
         $response = $client->send($request);
-        $transformedResponse = $request->toResponse($response);
 
-        self::assertTrue($response->getStatusCode() === 200);
-        self::assertEquals($token, $transformedResponse->getAccessToken());
-        self::assertEquals(1337, $transformedResponse->getExpiresIn());
-        self::assertEquals('Bearer', $transformedResponse->getTokenType());
+        self::assertTrue($response->getResponse()->getStatusCode() === 200);
+        self::assertEquals($token, $response->getAccessToken());
+        self::assertEquals(1337, $response->getExpiresIn());
+        self::assertEquals('Bearer', $response->getTokenType());
     }
 
     /**
      * @covers \LeDevoir\PianoIdApiSDK\Response\Token\VerifyTokenResponse::errorMessage
      * @return void
+     * @throws GuzzleException
      */
-    public function testForbiddenRequest()
+    public function testForbiddenRequest(): void
     {
         $client = new GuzzleClient(
             new Environment(),
@@ -73,12 +75,11 @@ class VerifyTokenTest extends TestCase
         );
 
         $response = $client->send($request);
-        $transformedResponse = $request->toResponse($response);
 
-        self::assertTrue($response->getStatusCode() === 403);
+        self::assertEquals(403, $response->getResponse()->getStatusCode());
         self::assertEquals(
             'Invalid access token',
-            $transformedResponse->errorMessage()
+            $response->errorMessage()
         );
     }
 }
