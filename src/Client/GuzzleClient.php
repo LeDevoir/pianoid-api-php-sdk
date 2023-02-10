@@ -22,7 +22,7 @@ final class GuzzleClient
         ?ClientInterface $client = null
     ){
         $this->environment = $environment ?? new Environment();
-        $this->client = $client ?? new Client(['base_uri' => $environment->getBaseUrl()]);
+        $this->client = $client ?? new Client(['base_uri' => $this->environment->getBaseUrl()]);
     }
 
     /**
