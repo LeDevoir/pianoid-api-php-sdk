@@ -18,7 +18,7 @@ final class GuzzleClient
     private Environment $environment;
 
     public function __construct(
-        ?Environment $environment,
+        ?Environment $environment = null,
         ?ClientInterface $client = null
     ){
         $this->environment = $environment ?? new Environment();
