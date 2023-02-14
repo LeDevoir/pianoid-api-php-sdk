@@ -8,6 +8,9 @@ use LeDevoir\PianoIdApiSDK\Response\Login\LoginResponse;
 
 class GenerateTokenRequest extends PianoIdRequest
 {
+    public const PATH = '/token';
+    public const UID_KEY = 'uid';
+
     private string $pianoUid;
 
     public function __construct(string $uid)
@@ -26,14 +29,6 @@ class GenerateTokenRequest extends PianoIdRequest
     /**
      * @inheritDoc
      */
-    public function uri(): string
-    {
-        return sprintf('%s/token', self::BASE_URL);
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function method(): string
     {
         return self::HTTP_METHOD_POST;
@@ -45,7 +40,15 @@ class GenerateTokenRequest extends PianoIdRequest
     public function queryParameters(): array
     {
         return [
-            'uid' => $this->pianoUid
+            self::UID_KEY => $this->pianoUid
         ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function path(): string
+    {
+        return self::PATH;
     }
 }

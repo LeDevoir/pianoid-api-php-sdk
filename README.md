@@ -25,10 +25,12 @@ use \LeDevoir\PianoIdApiSDK\Client\GuzzleClient;
 use \LeDevoir\PianoIdApiSDK\Request\Login\LoginRequest;
 
 $client = new GuzzleClient();
+$request = new LoginRequest('email@email.com', 'password');
 
-$response = $client->send(
-    new LoginRequest()
-);
+$httpResponse = $client->send($request);
+$pianoResponse = $request->toPianoIdResponse($httpResponse);
+
+$failed = $pianoResponse->isFailure();
 ```
 
 ### Tests

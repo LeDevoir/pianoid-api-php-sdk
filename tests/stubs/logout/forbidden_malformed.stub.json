@@ -1,0 +1,6 @@
+{
+  "error_code_list" : [ {
+    "message" : "Token is not valid. JWT processing failed. Additional details: [[17] Unable to process JOSE object (cause: org.jose4j.lang.JoseException: Invalid JOSE Compact Serialization. Expecting either 3 or 5 parts for JWS or JWE respectively but was 1.): marlformed_token]"
+  } ],
+  "force_show_captcha" : false
+}

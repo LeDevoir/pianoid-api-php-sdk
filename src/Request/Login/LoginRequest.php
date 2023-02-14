@@ -8,6 +8,7 @@ use LeDevoir\PianoIdApiSDK\Response\Login\LoginResponse;
 
 final class LoginRequest extends PianoIdRequest
 {
+    public const PATH = '/login';
     public const EMAIL_KEY = 'email';
     public const PASSWORD_KEY = 'password';
 
@@ -19,14 +20,6 @@ final class LoginRequest extends PianoIdRequest
     {
         $this->email = $email;
         $this->password = $password;
-    }
-
-    /**
-     * @return string
-     */
-    public function uri(): string
-    {
-        return sprintf('%s/login', self::BASE_URL);
     }
 
     /**
@@ -54,5 +47,13 @@ final class LoginRequest extends PianoIdRequest
     public function toPianoIdResponse(Response $response): LoginResponse
     {
         return new LoginResponse($response);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function path(): string
+    {
+        return self::PATH;
     }
 }

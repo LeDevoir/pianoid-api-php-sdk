@@ -29,12 +29,9 @@ class GenerateTokenRequestTest extends TestCase
             $request->queryParameters()
         );
 
-        $client = new GuzzleClient(
-            new Environment(),
-            $this->mockClientWithStubbedResponse(
-                200,
-                '/stubs/login/success.stub.json'
-            )
+        $client = $this->getTestClient(
+            200,
+            '/stubs/login/success.stub.json'
         );
 
         $httpResponse = $client->send($request);

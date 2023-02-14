@@ -37,12 +37,9 @@ class LoginRequestTest extends TestCase
 
     public function testSuccess()
     {
-        $client = new GuzzleClient(
-            new Environment(),
-            $this->mockClientWithStubbedResponse(
-                200,
-                '/stubs/login/success.stub.json'
-            )
+        $client = $this->getTestClient(
+            200,
+            '/stubs/login/success.stub.json'
         );
 
         $request = new LoginRequest(
@@ -66,12 +63,9 @@ class LoginRequestTest extends TestCase
 
     public function testForbiddenRequest()
     {
-        $client = new GuzzleClient(
-            new Environment(),
-            $this->mockClientWithStubbedResponse(
-                403,
-                '/stubs/login/forbidden.stub.json'
-            )
+        $client = $this->getTestClient(
+            403,
+            '/stubs/login/forbidden.stub.json'
         );
 
         $request = new LoginRequest(
@@ -92,12 +86,9 @@ class LoginRequestTest extends TestCase
 
     public function testBadRequest()
     {
-        $client = new GuzzleClient(
-            new Environment(),
-            $this->mockClientWithStubbedResponse(
-                400,
-                '/stubs/login/badRequest.stub.json'
-            )
+        $client = $this->getTestClient(
+            400,
+            '/stubs/login/badRequest.stub.json'
         );
 
         $request = new LoginRequest(
@@ -120,12 +111,9 @@ class LoginRequestTest extends TestCase
     {
         self::expectException(ServerException::class);
         self::expectExceptionCode(500);
-        $client = new GuzzleClient(
-            new Environment(),
-            $this->mockClientWithStubbedResponse(
-                500,
-                '/stubs/login/serverError.stub.json'
-            )
+        $client = $this->getTestClient(
+            500,
+            '/stubs/login/serverError.stub.json'
         );
 
         $request = new LoginRequest(

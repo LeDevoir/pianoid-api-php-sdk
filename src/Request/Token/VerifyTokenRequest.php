@@ -8,16 +8,13 @@ use LeDevoir\PianoIdApiSDK\Response\Token\VerifyTokenResponse;
 
 final class VerifyTokenRequest extends PianoIdRequest
 {
+    public const PATH = '/token/verify';
+
     private string $token;
 
     public function __construct(string $token)
     {
         $this->token = $token;
-    }
-
-    public function uri(): string
-    {
-        return sprintf('%s/token/verify', self::BASE_URL);
     }
 
     public function method(): string
@@ -46,5 +43,13 @@ final class VerifyTokenRequest extends PianoIdRequest
     public function toPianoIdResponse(Response $response): VerifyTokenResponse
     {
         return new VerifyTokenResponse($response);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function path(): string
+    {
+        return self::PATH;
     }
 }

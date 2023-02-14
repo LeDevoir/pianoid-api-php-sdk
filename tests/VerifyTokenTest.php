@@ -63,12 +63,9 @@ class VerifyTokenTest extends TestCase
      */
     public function testForbiddenRequest(): void
     {
-        $client = new GuzzleClient(
-            new Environment(),
-            $this->mockClientWithStubbedResponse(
-                403,
-                '/stubs/verifyToken/forbidden.stub.json'
-            )
+        $client = $this->getTestClient(
+            403,
+            '/stubs/verifyToken/forbidden.stub.json'
         );
 
         $request = new VerifyTokenRequest(
