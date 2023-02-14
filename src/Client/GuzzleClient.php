@@ -9,6 +9,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\RequestOptions;
 use LeDevoir\PianoIdApiSDK\Environment;
 use LeDevoir\PianoIdApiSDK\Request\PianoIdRequest;
 
@@ -33,12 +34,19 @@ final class GuzzleClient
     public function send(PianoIdRequest $request): Response
     {
         try {
-            $httpRequest = $request->toPsrRequest(
-                $this->environment->getApplicationId(),
-                $this->environment->getApiToken()
+            return $this->client->request(
+                $request->method(),
+                $request->uri(),
+                [
+                    RequestOptions::QUERY => array_merge(
+                        [
+                            'aid' => $this->environment->getApplicationId(),
+                            'api_token' => $this->environment->getApiToken()
+                        ],
+                        $request->queryParameters(),
+                    )
+                ]
             );
-
-            return $this->client->send($httpRequest);
         } catch (ClientException $exception) {
             return $exception->getResponse();
         } catch (ServerException|TransferException $exception) {
