@@ -41,7 +41,7 @@ class LoginRequestTest extends TestCase
             new Environment(),
             $this->mockClientWithStubbedResponse(
                 200,
-                '/stubs/login/success'
+                '/stubs/login/success.stub.json'
             )
         );
 
@@ -70,7 +70,7 @@ class LoginRequestTest extends TestCase
             new Environment(),
             $this->mockClientWithStubbedResponse(
                 403,
-                '/stubs/login/forbidden'
+                '/stubs/login/forbidden.stub.json'
             )
         );
 
@@ -96,7 +96,7 @@ class LoginRequestTest extends TestCase
             new Environment(),
             $this->mockClientWithStubbedResponse(
                 400,
-                '/stubs/login/badRequest'
+                '/stubs/login/badRequest.stub.json'
             )
         );
 
@@ -124,7 +124,7 @@ class LoginRequestTest extends TestCase
             new Environment(),
             $this->mockClientWithStubbedResponse(
                 500,
-                '/stubs/login/serverError'
+                '/stubs/login/serverError.stub.json'
             )
         );
 

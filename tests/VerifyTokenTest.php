@@ -40,7 +40,7 @@ class VerifyTokenTest extends TestCase
             new Environment(),
             $this->mockClientWithStubbedResponse(
                 200,
-                '/stubs/verifyToken/success'
+                '/stubs/verifyToken/success.stub.json'
             )
         );
 
@@ -67,7 +67,7 @@ class VerifyTokenTest extends TestCase
             new Environment(),
             $this->mockClientWithStubbedResponse(
                 403,
-                '/stubs/verifyToken/forbidden'
+                '/stubs/verifyToken/forbidden.stub.json'
             )
         );
 

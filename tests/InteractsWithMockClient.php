@@ -17,10 +17,9 @@ trait InteractsWithMockClient
                 [],
                 file_get_contents(
                     sprintf(
-                        '%s%s.%s',
+                        '%s%s',
                         __DIR__,
-                        $stubFilePath,
-                        'stub.json'
+                        $stubFilePath
                     )
                 )
             ),

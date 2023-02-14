@@ -4,7 +4,7 @@ namespace LeDevoir\PianoIdApiSDK\Response\Login;
 
 use LeDevoir\PianoIdApiSDK\Response\PianoIdResponse;
 
-final class LoginResponse extends PianoIdResponse
+class GenerateTokenResponse extends PianoIdResponse
 {
     use HasTokenResponseFields;
 }
