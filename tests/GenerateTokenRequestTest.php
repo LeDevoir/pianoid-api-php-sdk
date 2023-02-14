@@ -5,7 +5,7 @@ namespace LeDevoir\PianoIdApiSDK\Tests;
 use LeDevoir\PianoIdApiSDK\Client\GuzzleClient;
 use LeDevoir\PianoIdApiSDK\Environment;
 use LeDevoir\PianoIdApiSDK\Request\Login\GenerateTokenRequest;
-use LeDevoir\PianoIdApiSDK\Response\Login\GenerateTokenResponse;
+use LeDevoir\PianoIdApiSDK\Response\Login\LoginResponse;
 use PHPUnit\Framework\TestCase;
 
 class GenerateTokenRequestTest extends TestCase
@@ -40,7 +40,7 @@ class GenerateTokenRequestTest extends TestCase
         $httpResponse = $client->send($request);
         $pianoIdResponse = $request->toPianoIdResponse($httpResponse);
 
-        self::assertInstanceOf(GenerateTokenResponse::class, $pianoIdResponse);
+        self::assertInstanceOf(LoginResponse::class, $pianoIdResponse);
         self::assertEquals(
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
             $pianoIdResponse->getAccessToken()

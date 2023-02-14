@@ -4,8 +4,7 @@ namespace LeDevoir\PianoIdApiSDK\Request\Login;
 
 use GuzzleHttp\Psr7\Response;
 use LeDevoir\PianoIdApiSDK\Request\PianoIdRequest;
-use LeDevoir\PianoIdApiSDK\Response\Login\GenerateTokenResponse;
-use LeDevoir\PianoIdApiSDK\Response\PianoIdResponse;
+use LeDevoir\PianoIdApiSDK\Response\Login\LoginResponse;
 
 class GenerateTokenRequest extends PianoIdRequest
 {
@@ -19,9 +18,9 @@ class GenerateTokenRequest extends PianoIdRequest
     /**
      * @inheritDoc
      */
-    public function toPianoIdResponse(Response $response): PianoIdResponse
+    public function toPianoIdResponse(Response $response): LoginResponse
     {
-        return new GenerateTokenResponse($response);
+        return new LoginResponse($response);
     }
 
     /**
