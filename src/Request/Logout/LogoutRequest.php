@@ -22,7 +22,7 @@ class LogoutRequest extends PianoIdRequest
     /**
      * @inheritDoc
      */
-    public function toPianoIdResponse(Response $response): PianoIdResponse
+    public function toPianoIdResponse(Response $response): LogoutResponse
     {
         return new LogoutResponse($response);
     }
