@@ -46,7 +46,7 @@ final class LoginRequest extends PianoIdRequest
      */
     public function toPianoIdResponse(Response $response): LoginResponse
     {
-        return new LoginResponse($response);
+        return LoginResponse::fromResponse($response);
     }
 
     /**

@@ -15,4 +15,14 @@ class LogoutResponse extends PianoIdResponse
     {
         return $this->jti;
     }
+
+    /**
+     * @param string $jti
+     * @return LogoutResponse
+     */
+    public function setJti(string $jti): LogoutResponse
+    {
+        $this->jti = $jti;
+        return $this;
+    }
 }

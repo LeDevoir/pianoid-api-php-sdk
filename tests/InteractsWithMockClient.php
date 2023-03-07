@@ -10,7 +10,7 @@ use LeDevoir\PianoIdApiSDK\Client\GuzzleClient;
 
 trait InteractsWithMockClient
 {
-    public function getTestClient(int $status, string $stubPath)
+    public function getTestClient(int $status, string $stubPath): GuzzleClient
     {
         return new GuzzleClient(
             null,

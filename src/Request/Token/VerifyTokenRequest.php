@@ -42,7 +42,7 @@ final class VerifyTokenRequest extends PianoIdRequest
      */
     public function toPianoIdResponse(Response $response): VerifyTokenResponse
     {
-        return new VerifyTokenResponse($response);
+        return VerifyTokenResponse::fromResponse($response);
     }
 
     /**

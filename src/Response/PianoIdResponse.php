@@ -5,36 +5,38 @@ namespace LeDevoir\PianoIdApiSDK\Response;
 use GuzzleHttp\Psr7\Response;
 use LeDevoir\PianoIdApiSDK\Utils;
 
-abstract class PianoIdResponse implements WrapsHttpResponse
+abstract class PianoIdResponse
 {
-    protected Response $response;
-    public array $errorCodeList;
+    private Response $response;
 
-    public function __construct(Response $response)
+    protected function __construct(Response $response)
     {
         $this->response = $response;
-        $this->mapResponseToAttributes();
     }
 
     /**
-     * Maps response body properties into self attributes
+     * Maps response data into the actual SDK response object (DTO)
      *
-     * TODO: only works on one dimension properties most likely; to be reworked or changed
-     *
-     * @return void
+     * @param Response $response
+     * @return static
      */
-    private function mapResponseToAttributes(): void
-    {
+    public static function fromResponse(Response $response): static {
         $body = json_decode(
-            (string) $this->response->getBody()
+            (string) $response->getBody()
         );
 
+        $instance = new static($response);
+
         foreach($body as $key => $value) {
-            $property = Utils::snakeToCamelCase($key);
-            if (property_exists(static::class, $property)) {
-                $this->{$property} = $body->{$key};
+            $targetProperty = Utils::snakeToCamelCase($key);
+
+            if (property_exists(static::class, $targetProperty)) {
+                $setter = 'set' . ucwords($targetProperty);
+                $instance->$setter($body->{$key});
             }
         }
+
+        return $instance;
     }
 
     /**
@@ -68,13 +70,5 @@ abstract class PianoIdResponse implements WrapsHttpResponse
             },
             $body->{'error_code_list'}
         );
-    }
-
-    /**
-     * @return Response
-     */
-    public function getHttpResponse(): Response
-    {
-        return $this->response;
     }
 }

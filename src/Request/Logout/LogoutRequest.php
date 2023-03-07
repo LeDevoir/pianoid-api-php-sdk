@@ -5,7 +5,6 @@ namespace LeDevoir\PianoIdApiSDK\Request\Logout;
 use GuzzleHttp\Psr7\Response;
 use LeDevoir\PianoIdApiSDK\Request\PianoIdRequest;
 use LeDevoir\PianoIdApiSDK\Response\Logout\LogoutResponse;
-use LeDevoir\PianoIdApiSDK\Response\PianoIdResponse;
 
 class LogoutRequest extends PianoIdRequest
 {
@@ -24,7 +23,7 @@ class LogoutRequest extends PianoIdRequest
      */
     public function toPianoIdResponse(Response $response): LogoutResponse
     {
-        return new LogoutResponse($response);
+        return LogoutResponse::fromResponse($response);
     }
 
     /**
