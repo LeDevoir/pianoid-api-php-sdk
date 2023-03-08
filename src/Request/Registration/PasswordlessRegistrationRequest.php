@@ -59,6 +59,8 @@ class PasswordlessRegistrationRequest extends PianoIdRequest
             'first_name' => $this->firstName,
             'last_name' => $this->lastName,
             'password' => '',
+            'is_passwordless' => 'true',
+            'consents' => $_ENV['PIANO_CONSENTS'] ?? ''
         ];
     }
 }

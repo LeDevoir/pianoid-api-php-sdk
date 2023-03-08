@@ -2,13 +2,11 @@
 
 namespace LeDevoir\PianoIdApiSDK\Tests;
 
-use LeDevoir\PianoIdApiSDK\Client\GuzzleClient;
-use LeDevoir\PianoIdApiSDK\Environment;
 use LeDevoir\PianoIdApiSDK\Request\Login\GenerateTokenRequest;
 use LeDevoir\PianoIdApiSDK\Response\Login\LoginResponse;
 use PHPUnit\Framework\TestCase;
 
-class GenerateTokenRequestTest extends TestCase
+class GenerateTokenTest extends TestCase
 {
     use InteractsWithMockClient;
 

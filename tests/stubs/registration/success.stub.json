@@ -1,0 +1,9 @@
+{
+  "access_token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+  "token_type" : "Bearer",
+  "refresh_token" : "bogus_token",
+  "expires_in" : 86399,
+  "registration" : true,
+  "email_confirmation_required" : false,
+  "extend_expired_access_enabled" : false
+}

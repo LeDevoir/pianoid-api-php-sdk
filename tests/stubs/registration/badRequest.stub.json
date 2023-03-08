@@ -1,0 +1,7 @@
+{
+  "error_code_list" : [ {
+    "code" : 1212,
+    "message" : "Email format is not valid",
+    "field_name" : "email"
+  } ]
+}

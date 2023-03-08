@@ -4,7 +4,6 @@ namespace LeDevoir\PianoIdApiSDK\Tests;
 
 use GuzzleHttp\Exception\ServerException;
 use LeDevoir\PianoIdApiSDK\Client\GuzzleClient;
-use LeDevoir\PianoIdApiSDK\Environment;
 use LeDevoir\PianoIdApiSDK\Request\PianoIdRequest;
 use LeDevoir\PianoIdApiSDK\Request\Login\LoginRequest;
 use PHPUnit\Framework\TestCase;
@@ -12,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @property GuzzleClient $client
  */
-class LoginRequestTest extends TestCase
+class LoginTest extends TestCase
 {
     use InteractsWithMockClient;
 

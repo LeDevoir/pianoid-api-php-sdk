@@ -23,7 +23,7 @@ abstract class PianoIdResponse
     public static function fromResponse(Response $response): static {
         $body = json_decode(
             (string) $response->getBody()
-        );
+        ) ?? [];
 
         $instance = new static($response);
 
