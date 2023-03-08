@@ -41,4 +41,4 @@ To debug unit tests
 
 ### Future outlook / TODO
 * Might consider guzzle interfaces and main classes (request, response & client integration further ?)
-* Base response success transform only works for 1 dimension response object
+* Consider removing guzzle client and replacing with cURL client or add client interface and provide both options
