@@ -36,7 +36,7 @@ class PasswordlessRegistrationRequest extends PianoIdRequest
     /**
      * @inheritDoc
      */
-    public function toPianoIdResponse(Response $response): PianoIdResponse
+    public function toPianoIdResponse(Response $response): PasswordlessRegistrationResponse
     {
         return PasswordlessRegistrationResponse::fromResponse($response);
     }
