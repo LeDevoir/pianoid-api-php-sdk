@@ -4,7 +4,6 @@ namespace LeDevoir\PianoIdApiSDK\Request\Registration;
 
 use GuzzleHttp\Psr7\Response;
 use LeDevoir\PianoIdApiSDK\Request\PianoIdRequest;
-use LeDevoir\PianoIdApiSDK\Response\PianoIdResponse;
 use LeDevoir\PianoIdApiSDK\Response\Registration\PasswordlessRegistrationResponse;
 
 class PasswordlessRegistrationRequest extends PianoIdRequest

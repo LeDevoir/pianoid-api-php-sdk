@@ -4,13 +4,13 @@ namespace LeDevoir\PianoIdApiSDK\Response;
 
 trait InteractsWithAccessToken
 {
-    public string $accessToken;
-    public string $tokenType;
-    public string $refreshToken;
-    public int $expiresIn;
-    public bool $emailConfirmationRequired;
-    public bool $extendExpiredAccessEnabled;
-    public bool $registration;
+    public string $accessToken = '';
+    public string $tokenType = '';
+    public string $refreshToken = '';
+    public int $expiresIn = 0;
+    public bool $emailConfirmationRequired = false;
+    public bool $extendExpiredAccessEnabled = false;
+    public bool $registration = false;
 
     /**
      * @return string

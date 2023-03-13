@@ -56,6 +56,17 @@ class RegistrationTest extends TestCase
             ],
             $transformed->errors()
         );
+
+        /**
+         * Test bad request default values
+         */
+        $this->assertEquals('', $transformed->getAccessToken());
+        $this->assertEquals('', $transformed->getTokenType());
+        $this->assertEquals('', $transformed->getRefreshToken());
+        $this->assertEquals(0, $transformed->getExpiresIn());
+        $this->assertFalse($transformed->extendExpiredAccessEnabled);
+        $this->assertFalse($transformed->registration);
+        $this->assertFalse($transformed->emailConfirmationRequired);
     }
 
     public function testRegistrationSuccess()

@@ -6,7 +6,7 @@ use LeDevoir\PianoIdApiSDK\Response\PianoIdResponse;
 
 class LogoutResponse extends PianoIdResponse
 {
-    public string $jti;
+    public string $jti = '';
 
     /**
      * @return string
@@ -23,6 +23,7 @@ class LogoutResponse extends PianoIdResponse
     public function setJti(string $jti): LogoutResponse
     {
         $this->jti = $jti;
+
         return $this;
     }
 }

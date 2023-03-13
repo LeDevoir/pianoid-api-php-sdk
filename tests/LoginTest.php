@@ -4,8 +4,8 @@ namespace LeDevoir\PianoIdApiSDK\Tests;
 
 use GuzzleHttp\Exception\ServerException;
 use LeDevoir\PianoIdApiSDK\Client\GuzzleClient;
-use LeDevoir\PianoIdApiSDK\Request\PianoIdRequest;
 use LeDevoir\PianoIdApiSDK\Request\Login\LoginRequest;
+use LeDevoir\PianoIdApiSDK\Request\PianoIdRequest;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -81,6 +81,7 @@ class LoginTest extends TestCase
             'That combination of email and password is not recognized',
             $transformed->errorMessage()
         );
+        self::assertEquals('', $transformed->getAccessToken());
     }
 
     public function testBadRequest()
