@@ -35,8 +35,8 @@ final class GuzzleClient
     {
         try {
             return $this->client->request(
-                $request->method(),
-                $request->uri(),
+                $request->method()->value,
+                $request->url(),
                 [
                     RequestOptions::QUERY => array_merge(
                         [

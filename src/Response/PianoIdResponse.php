@@ -15,7 +15,7 @@ abstract class PianoIdResponse
     }
 
     /**
-     * Maps response data into the actual SDK response object (DTO)
+     * Maps response data into response object properties
      *
      * @param Response $response
      * @return static

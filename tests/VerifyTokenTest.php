@@ -5,6 +5,7 @@ namespace LeDevoir\PianoIdApiSDK\Tests;
 use GuzzleHttp\Exception\GuzzleException;
 use LeDevoir\PianoIdApiSDK\Client\GuzzleClient;
 use LeDevoir\PianoIdApiSDK\Environment;
+use LeDevoir\PianoIdApiSDK\Request\Methods\HTTPMethod;
 use LeDevoir\PianoIdApiSDK\Request\Token\VerifyTokenRequest;
 use PHPUnit\Framework\TestCase;
 
@@ -20,8 +21,8 @@ class VerifyTokenTest extends TestCase
             'very_secure_token'
         );
 
-        self::assertEquals('POST', $request->method());
-        self::assertEquals(self::VERIFY_TOKEN_URL, $request->uri());
+        self::assertEquals(HTTPMethod::POST, $request->method());
+        self::assertEquals(self::VERIFY_TOKEN_URL, $request->url());
         self::assertEquals('very_secure_token', $request->getToken());
         self::assertEmpty(array_diff(['token' => 'very_secure_token'], $request->queryParameters()));
     }

@@ -6,7 +6,7 @@ use GuzzleHttp\Psr7\Response;
 use LeDevoir\PianoIdApiSDK\Response\Login\LoginResponse;
 use LeDevoir\PianoIdApiSDK\Response\PianoIdResponse;
 
-interface TransformsResponse
+interface ProducesResponse
 {
     /**
      * @param Response $response
