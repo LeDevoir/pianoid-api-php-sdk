@@ -19,7 +19,7 @@ class LogoutRequestTest extends TestCase
             'valid_token'
         );
 
-        self::assertEquals(self::URL, $request->uri());
+        self::assertEquals(self::URL, $request->url());
         self::assertEquals(['token' => 'valid_token'], $request->queryParameters());
 
         $client = $this->getTestClient(200, '/stubs/logout/success.stub.json');

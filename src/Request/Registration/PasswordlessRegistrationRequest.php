@@ -3,11 +3,14 @@
 namespace LeDevoir\PianoIdApiSDK\Request\Registration;
 
 use GuzzleHttp\Psr7\Response;
+use LeDevoir\PianoIdApiSDK\Request\Methods\HTTPMethod;
 use LeDevoir\PianoIdApiSDK\Request\PianoIdRequest;
 use LeDevoir\PianoIdApiSDK\Response\Registration\PasswordlessRegistrationResponse;
 
 class PasswordlessRegistrationRequest extends PianoIdRequest
 {
+    public const PATH = '/register';
+
     private string $email;
     private string $firstName;
     private string $lastName;
@@ -22,12 +25,10 @@ class PasswordlessRegistrationRequest extends PianoIdRequest
         $this->lastName = $lastName;
     }
 
-    public const PATH = '/register';
-
     /**
      * @inheritDoc
      */
-    protected function path(): string
+    public function path(): string
     {
         return self::PATH;
     }
@@ -43,9 +44,9 @@ class PasswordlessRegistrationRequest extends PianoIdRequest
     /**
      * @inheritDoc
      */
-    public function method(): string
+    public function method(): HTTPMethod
     {
-        return self::HTTP_METHOD_POST;
+        return HTTPMethod::POST;
     }
 
     /**

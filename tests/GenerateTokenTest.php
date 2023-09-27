@@ -3,6 +3,7 @@
 namespace LeDevoir\PianoIdApiSDK\Tests;
 
 use LeDevoir\PianoIdApiSDK\Request\Login\GenerateTokenRequest;
+use LeDevoir\PianoIdApiSDK\Request\Methods\HTTPMethod;
 use LeDevoir\PianoIdApiSDK\Response\Login\LoginResponse;
 use PHPUnit\Framework\TestCase;
 
@@ -18,8 +19,8 @@ class GenerateTokenTest extends TestCase
             'valid-uuid'
         );
 
-        $this->assertEquals('POST', $request->method());
-        $this->assertEquals(self::URL, $request->uri());
+        $this->assertEquals(HTTPMethod::POST, $request->method());
+        $this->assertEquals(self::URL, $request->url());
         $this->assertEquals(
             [
                 'uid' => 'valid-uuid'

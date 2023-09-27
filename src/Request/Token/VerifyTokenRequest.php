@@ -3,6 +3,7 @@
 namespace LeDevoir\PianoIdApiSDK\Request\Token;
 
 use GuzzleHttp\Psr7\Response;
+use LeDevoir\PianoIdApiSDK\Request\Methods\HTTPMethod;
 use LeDevoir\PianoIdApiSDK\Request\PianoIdRequest;
 use LeDevoir\PianoIdApiSDK\Response\Token\VerifyTokenResponse;
 
@@ -17,9 +18,9 @@ final class VerifyTokenRequest extends PianoIdRequest
         $this->token = $token;
     }
 
-    public function method(): string
+    public function method(): HTTPMethod
     {
-        return self::HTTP_METHOD_POST;
+        return HTTPMethod::POST;
     }
 
     public function queryParameters(): array
@@ -48,7 +49,7 @@ final class VerifyTokenRequest extends PianoIdRequest
     /**
      * @inheritDoc
      */
-    protected function path(): string
+    public function path(): string
     {
         return self::PATH;
     }

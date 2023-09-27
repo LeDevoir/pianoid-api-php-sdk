@@ -5,7 +5,7 @@ namespace LeDevoir\PianoIdApiSDK\Tests;
 use GuzzleHttp\Exception\ServerException;
 use LeDevoir\PianoIdApiSDK\Client\GuzzleClient;
 use LeDevoir\PianoIdApiSDK\Request\Login\LoginRequest;
-use LeDevoir\PianoIdApiSDK\Request\PianoIdRequest;
+use LeDevoir\PianoIdApiSDK\Request\Methods\HTTPMethod;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -24,8 +24,8 @@ class LoginTest extends TestCase
             'secret'
         );
 
-        self::assertEquals(self::LOGIN_URL, $request->uri());
-        self::assertEquals(PianoIdRequest::HTTP_METHOD_POST, $request->method());
+        self::assertEquals(self::LOGIN_URL, $request->url());
+        self::assertEquals(HTTPMethod::POST, $request->method());
 
         self::assertArrayHasKey(LoginRequest::EMAIL_KEY, $request->queryParameters());
         self::assertArrayHasKey(LoginRequest::PASSWORD_KEY, $request->queryParameters());

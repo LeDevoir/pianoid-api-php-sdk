@@ -23,7 +23,7 @@ class RegistrationTest extends TestCase
 
         $this->assertEquals(
             self::FULL_PATH,
-            $request->uri()
+            $request->url()
         );
 
         $this->assertInstanceOf(

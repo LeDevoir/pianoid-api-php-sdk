@@ -3,6 +3,7 @@
 namespace LeDevoir\PianoIdApiSDK\Request\Login;
 
 use GuzzleHttp\Psr7\Response;
+use LeDevoir\PianoIdApiSDK\Request\Methods\HTTPMethod;
 use LeDevoir\PianoIdApiSDK\Request\PianoIdRequest;
 use LeDevoir\PianoIdApiSDK\Response\Login\LoginResponse;
 
@@ -29,9 +30,9 @@ class GenerateTokenRequest extends PianoIdRequest
     /**
      * @inheritDoc
      */
-    public function method(): string
+    public function method(): HTTPMethod
     {
-        return self::HTTP_METHOD_POST;
+        return HTTPMethod::POST;
     }
 
     /**
@@ -47,7 +48,7 @@ class GenerateTokenRequest extends PianoIdRequest
     /**
      * @inheritDoc
      */
-    protected function path(): string
+    public function path(): string
     {
         return self::PATH;
     }
